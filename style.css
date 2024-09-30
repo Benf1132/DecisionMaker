@@ -32,6 +32,7 @@ input[type="number"], input[type="text"] {
     margin: 10px 0;
     border: 1px solid #0078d7;
     border-radius: 5px;
+    font-size: 16px; /* Prevent zoom on mobile */
 }
 
 button {
@@ -91,5 +92,25 @@ button:hover {
     }
     60% {
         transform: translateY(-15px);
+    }
+}
+
+/* For mobile screens */
+@media (max-width: 600px) {
+    .container {
+        margin: 10px auto; /* Less margin */
+        padding: 10px;
+        width: 90%; /* Fit most of the screen */
+        box-sizing: border-box;
+    }
+
+    input[type="number"], input[type="text"] {
+        width: 100%; /* Ensure the inputs are 100% width */
+        font-size: 1em; /* Adjust font size if needed */
+    }
+
+    button {
+        width: 100%; /* Make buttons full width on small screens */
+        font-size: 1em;
     }
 }
