@@ -39,28 +39,54 @@ generateInputsButton.addEventListener('click', () => {
 // Choose a random item from the input fields
 chooseButton.addEventListener('click', () => {
     const inputs = document.querySelectorAll('.item-input');
-    const items = Array.from(inputs).map(input => input.value).filter(value => value.trim() !== '');
+    const items = Array.from(inputs).map(input => input.value.trim());
 
-    if (items.length > 0) {
-        const remainingItems = items.filter(item => !previouslySelected.includes(item));
-
-        if (remainingItems.length === 0) {
-            previouslySelected = []; // Reset when all options are chosen
-            alert("All options have been selected! Resetting...");
-            return;
-        }
-
-        const randomChoice = remainingItems[Math.floor(Math.random() * remainingItems.length)];
-        previouslySelected.push(randomChoice); // Store selected item
-
-        displayDecision(randomChoice);
-
-        // Hide "Choose" and show "Try Again"
-        chooseButton.classList.add('hidden');
-        tryAgainButton.classList.remove('hidden');
-    } else {
+    // Check if all fields are filled
+    if (items.some(item => item === '')) {
         alert('Please fill out all input fields.');
+        return; // Stop execution if any field is empty
     }
+
+    const remainingItems = items.filter(item => !previouslySelected.includes(item));
+
+    if (remainingItems.length === 0) {
+        previouslySelected = []; // Reset when all options are chosen
+        alert("All options have been selected! Resetting...");
+        return;
+    }
+
+    const randomChoice = remainingItems[Math.floor(Math.random() * remainingItems.length)];
+    previouslySelected.push(randomChoice); // Store selected item
+
+    displayDecision(randomChoice);
+
+    // Hide "Choose" and show "Try Again"
+    chooseButton.classList.add('hidden');
+    tryAgainButton.classList.remove('hidden');
+});
+
+// Try Again button - selects a new random item
+tryAgainButton.addEventListener('click', () => {
+    const inputs = document.querySelectorAll('.item-input');
+    const items = Array.from(inputs).map(input => input.value.trim());
+
+    // Check if all fields are filled
+    if (items.some(item => item === '')) {
+        alert('Please fill out all input fields.');
+        return; // Stop execution if any field is empty
+    }
+
+    const remainingItems = items.filter(item => !previouslySelected.includes(item));
+
+    if (remainingItems.length === 0) {
+        previouslySelected = []; // Reset when all options are chosen
+        alert("All options have been selected! Resetting...");
+        return;
+    }
+
+    const randomChoice = remainingItems[Math.floor(Math.random() * remainingItems.length)];
+    previouslySelected.push(randomChoice);
+    displayDecision(randomChoice);
 });
 
 // Display the decision with a splashy effect
@@ -71,28 +97,6 @@ function displayDecision(choice) {
     inputScreen.classList.add('hidden');
     resultScreen.classList.remove('hidden');
 }
-
-// Try Again button - selects a new random item
-tryAgainButton.addEventListener('click', () => {
-    const inputs = document.querySelectorAll('.item-input');
-    const items = Array.from(inputs).map(input => input.value).filter(value => value.trim() !== '');
-
-    if (items.length > 0) {
-        const remainingItems = items.filter(item => !previouslySelected.includes(item));
-
-        if (remainingItems.length === 0) {
-            previouslySelected = []; // Reset when all options are chosen
-            alert("All options have been selected! Resetting...");
-            return;
-        }
-
-        const randomChoice = remainingItems[Math.floor(Math.random() * remainingItems.length)];
-        previouslySelected.push(randomChoice);
-        displayDecision(randomChoice);
-    } else {
-        alert('Please fill out all input fields.');
-    }
-});
 
 // Clear everything and go back to the start
 clearButton.addEventListener('click', () => {
