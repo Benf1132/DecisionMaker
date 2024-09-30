@@ -113,7 +113,7 @@ button:hover {
     }
 
     input[type="number"], input[type="text"] {
-        width: 97.5%; /* Ensure the inputs are 100% width */
+        width: 90%; 
         font-size: 1em; /* Adjust font size if needed */
     }
 
