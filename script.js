@@ -25,7 +25,7 @@ generateInputsButton.addEventListener('click', () => {
         for (let i = 0; i < itemCount; i++) {
             const input = document.createElement('input');
             input.type = 'text';
-            input.placeholder = `Item ${i + 1}`;
+            input.placeholder = `Option ${i + 1}`;
             input.classList.add('item-input');
             inputFieldsDiv.appendChild(input);
         }
