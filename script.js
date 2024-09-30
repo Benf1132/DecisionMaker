@@ -6,10 +6,12 @@ const generateInputsButton = document.getElementById('generateInputs');
 const inputFieldsDiv = document.getElementById('inputFields');
 const chooseButton = document.getElementById('chooseButton');
 const clearButton = document.getElementById('clearButton');
-const tryAgainButton = document.getElementById('tryAgainButton'); // Now inside result screen
+const tryAgainButton = document.getElementById('tryAgainButton');
 const resultScreen = document.getElementById('result-screen');
 const decisionText = document.getElementById('decisionText');
 const clearButtonResult = document.getElementById('clearButtonResult');
+
+let previouslySelected = [];
 
 // Generate input fields based on user count
 generateInputsButton.addEventListener('click', () => {
@@ -40,12 +42,22 @@ chooseButton.addEventListener('click', () => {
     const items = Array.from(inputs).map(input => input.value).filter(value => value.trim() !== '');
 
     if (items.length > 0) {
-        const randomChoice = items[Math.floor(Math.random() * items.length)];
+        const remainingItems = items.filter(item => !previouslySelected.includes(item));
+
+        if (remainingItems.length === 0) {
+            previouslySelected = []; // Reset when all options are chosen
+            alert("All options have been selected! Resetting...");
+            return;
+        }
+
+        const randomChoice = remainingItems[Math.floor(Math.random() * remainingItems.length)];
+        previouslySelected.push(randomChoice); // Store selected item
+
         displayDecision(randomChoice);
 
-        // Hide "Choose" and clear button, show result screen
-        inputScreen.classList.add('hidden');
-        resultScreen.classList.remove('hidden');
+        // Hide "Choose" and show "Try Again"
+        chooseButton.classList.add('hidden');
+        tryAgainButton.classList.remove('hidden');
     } else {
         alert('Please fill out all input fields.');
     }
@@ -55,7 +67,8 @@ chooseButton.addEventListener('click', () => {
 function displayDecision(choice) {
     decisionText.innerText = choice;
 
-    // Show result screen with animation
+    // Hide input screen, show result screen with animation
+    inputScreen.classList.add('hidden');
     resultScreen.classList.remove('hidden');
 }
 
@@ -65,7 +78,16 @@ tryAgainButton.addEventListener('click', () => {
     const items = Array.from(inputs).map(input => input.value).filter(value => value.trim() !== '');
 
     if (items.length > 0) {
-        const randomChoice = items[Math.floor(Math.random() * items.length)];
+        const remainingItems = items.filter(item => !previouslySelected.includes(item));
+
+        if (remainingItems.length === 0) {
+            previouslySelected = []; // Reset when all options are chosen
+            alert("All options have been selected! Resetting...");
+            return;
+        }
+
+        const randomChoice = remainingItems[Math.floor(Math.random() * remainingItems.length)];
+        previouslySelected.push(randomChoice);
         displayDecision(randomChoice);
     } else {
         alert('Please fill out all input fields.');
@@ -89,4 +111,6 @@ function resetApp() {
     inputScreen.classList.add('hidden');
     startScreen.classList.remove('hidden');
     chooseButton.classList.remove('hidden');
+    tryAgainButton.classList.add('hidden'); // Reset "Try Again" visibility
+    previouslySelected = []; // Reset the previously selected items
 }
