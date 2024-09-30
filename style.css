@@ -4,14 +4,7 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f8ff;
-    color: #333;
-    margin: 0;
-    padding: 0;
+    text-align: center;
 }
 
 .container {
@@ -35,12 +28,13 @@ label {
 }
 
 input[type="number"], input[type="text"] {
-    width: 97.5%;
+    width: 100%; /* Make input fields take up the full width of the container */
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #0078d7;
     border-radius: 5px;
     font-size: 16px; /* Prevent zoom on mobile */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
 
 button {
@@ -60,10 +54,6 @@ button:hover {
 
 .hidden {
     display: none;
-}
-
-#result-screen {
-    text-align: center;
 }
 
 #result-screen h2 {
@@ -113,7 +103,7 @@ button:hover {
     }
 
     input[type="number"], input[type="text"] {
-        width: 95%; /* Ensure the inputs are 100% width */
+        width: 100%; /* Ensure the inputs are 100% width */
         font-size: 1em; /* Adjust font size if needed */
     }
 
