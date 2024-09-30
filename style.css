@@ -16,101 +16,41 @@ body {
     border-radius: 10px;
 }
 
-h1 {
-    text-align: center;
-    color: #0078d7;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-}
-
-input[type="number"], input[type="text"] {
-    width: 100%;
+/* Styling the input fields and buttons uniformly */
+input[type="number"], input[type="text"], button {
+    width: calc(100% - 40px); /* Adjust input/button width within container */
+    max-width: 400px; /* Ensure a max width for readability */
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px auto; /* Centering inputs and buttons */
+    display: block; /* Make them behave like block elements */
     border: 1px solid #0078d7;
     border-radius: 5px;
-    font-size: 16px; /* Prevent zoom on mobile */
+    font-size: 16px;
+    box-sizing: border-box; /* Ensures padding doesn't overflow */
 }
 
+/* Making the buttons look consistent and centered */
 button {
-    display: inline-block;
-    padding: 10px 20px;
     background-color: #0078d7;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    margin: 10px 5px;
+    text-align: center;
 }
 
 button:hover {
     background-color: #005fa3;
 }
 
-.hidden {
-    display: none;
-}
-
-#result-screen {
-    text-align: center;
-}
-
-#result-screen h2 {
-    font-size: 2.5em;
-    color: #e74c3c;
-    animation: bounce 1s ease-in-out infinite;
-}
-
-#result-screen p {
-    font-size: 3em;
-    color: #0078d7;
-    animation: pop 0.5s ease-in-out;
-}
-
-/* Animation for the decision text */
-@keyframes pop {
-    0% {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* Bounce animation for decision header */
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-30px);
-    }
-    60% {
-        transform: translateY(-15px);
-    }
-}
-
 /* For mobile screens */
 @media (max-width: 600px) {
     .container {
-        margin: 10px auto; /* Less margin */
-        padding: 10px;
-        width: 90%; /* Fit most of the screen */
-        box-sizing: border-box;
+        width: 90%;
+        margin: 10px auto; /* Adjusted margin for smaller devices */
     }
 
-    input[type="number"], input[type="text"] {
-        width: 100%; /* Ensure the inputs are 100% width */
-        font-size: 1em; /* Adjust font size if needed */
-    }
-
-    button {
-        width: 100%; /* Make buttons full width on small screens */
-        font-size: 1em;
+    input[type="number"], input[type="text"], button {
+        width: calc(100% - 40px); /* Ensures consistent width within the container */
+        max-width: 100%; /* Remove fixed max-width for mobile */
     }
 }
